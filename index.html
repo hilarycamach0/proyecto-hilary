@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hilary Camacho | Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --text-color: #202124;
+            --background-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 20px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .footer {
+            background: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div id="current-time"></div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Hilary Camacho</h1>
+            <p>Innovación y Tecnología</p>
+            <div class="social-links">
+                <a href="#" onclick="showMessage('linkedin')">LinkedIn</a>
+                <a href="#" onclick="showMessage('github')">GitHub</a>
+                <a href="#" onclick="showMessage('email')">Email</a>
+            </div>
+        </section>
+
+        <div class="card">
+            <h2>Sobre el Proyecto</h2>
+            <p>Implementación exitosa de servidor Windows en AWS utilizando servicios de última generación:</p>
+            <ul id="tech-list"></ul>
+        </div>
+
+        <div class="card">
+            <h2>Estado del Servidor</h2>
+            <p>Servidor funcionando correctamente en:</p>
+            <p id="server-info"></p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 Hilary Camacho | Desarrollado con AWS</p>
+    </footer>
+
+    <script>
+        // Actualizar hora en tiempo real
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('current-time').textContent = 
+                `Hora del servidor: ${now.toLocaleTimeString()}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Lista de tecnologías
+        const technologies = [
+            'Amazon Web Services (AWS)',
+            'Windows Server 2022',
+            'Internet Information Services (IIS)',
+            'HTML5 / CSS3 / JavaScript'
+        ];
+
+        const techList = document.getElementById('tech-list');
+        technologies.forEach(tech => {
+            const li = document.createElement('li');
+            li.textContent = tech;
+            techList.appendChild(li);
+        });
+
+        // Información del servidor
+        document.getElementById('server-info').textContent = 
+            `${window.location.hostname} (${window.location.host})`;
+
+        // Mensajes interactivos
+        function showMessage(platform) {
+            const messages = {
+                linkedin: '¡Conectemos en LinkedIn!',
+                github: 'Revisa mis proyectos en GitHub',
+                email: 'Contáctame por correo'
+            };
+            alert(messages[platform]);
+        }
+
+        // Efecto de carga progresiva
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
